@@ -1,0 +1,4 @@
+Autotest.add_hook(:initialize) do |at|
+  at.add_exception %r{^\.git}  # ignore Version Control System
+  at.add_exception %r{^./spec/actual-lp}
+end
