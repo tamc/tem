@@ -1,0 +1,25 @@
+GIT
+  remote: git://github.com/tamc/rglpk.git
+  revision: 083986927f53388df22ab8f5db7a19fc59d98c42
+  specs:
+    rglpk (0.2.4)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    diff-lcs (1.1.2)
+    rspec (2.6.0)
+      rspec-core (~> 2.6.0)
+      rspec-expectations (~> 2.6.0)
+      rspec-mocks (~> 2.6.0)
+    rspec-core (2.6.4)
+    rspec-expectations (2.6.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.6.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rglpk!
+  rspec
