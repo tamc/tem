@@ -49,16 +49,10 @@ class Model
     @rows.sort_by { |k,v| v.i }
   end
   
-  def setup_coefficients 
-    c = sorted_rows.map do |row|
-      puts "Can't find constraint #{row.first} in #{coefficients.keys.inspect}" unless coefficients.has_key?(row.first)
-      r = coefficients[row.first] || {}
-      sorted_columns.map do |col|
-        #puts "Can't find variable #{col.first} in #{r.keys.inspect}" unless r.has_key?(col.first)
-        r[col.first] || 0.0
-      end
+  def setup_coefficients
+    coefficients.each do |name,c|
+      rows[name].set_with_index(c.map { |k,v| [columns[k].j,v]})
     end
-    problem.set_matrix(c.flatten)
   end
   
   def setup_objective_function
@@ -69,7 +63,7 @@ class Model
       #p item
       item.respond_to?(@target) ? item.send(@target) : 0.0
     end
-    p o
+    # p o
     problem.obj.coefs = o
   end
   
@@ -129,8 +123,10 @@ end
 
 class Fuel < Item
   def setup(model)
-    model.variable name, 0, available
+    # Energy can be converted, but not created or destroyed
     model.constrain name, 0, 0
+    # Energy can enter the system, up to the limit of availability
+    model.variable name, 0, available
     model.coefficient name, name, 1.0
   end
 end
