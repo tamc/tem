@@ -1,6 +1,5 @@
-GIT
-  remote: git://github.com/tamc/rglpk.git
-  revision: 083986927f53388df22ab8f5db7a19fc59d98c42
+PATH
+  remote: ~/Documents/tem/rglpk
   specs:
     rglpk (0.2.4)
 
