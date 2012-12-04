@@ -1,12 +1,8 @@
-PATH
-  remote: ~/Documents/tem/rglpk
-  specs:
-    rglpk (0.2.4)
-
 GEM
   remote: http://rubygems.org/
   specs:
     diff-lcs (1.1.2)
+    rglpk (0.2.6)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
       rspec-expectations (~> 2.6.0)
@@ -20,5 +16,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rglpk!
+  rglpk
   rspec

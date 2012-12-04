@@ -9,7 +9,7 @@ class Model
     @items = {}
     @columns = {}
     @rows = {}
-    @coefficients = {}
+    @coefficients = Hash.new { |hash, key| hash[key] = Hash.new { |hash, key| hash[key] = 0 } }
   end
   
   def add(*new_items)
@@ -50,9 +50,17 @@ class Model
   end
   
   def setup_coefficients
-    coefficients.each do |name,c|
-      rows[name].set_with_index(c.map { |k,v| [columns[k].j,v]})
+    matrix = Array.new
+    number_of_columns = columns.size
+
+    rows.each do |row_name, row|
+      columns.each do |column_name, column|
+        position_in_matrix = ((row.i-1) * number_of_columns) + column.j - 1
+        matrix[position_in_matrix] = coefficients[row_name][column_name]
+      end
     end
+
+    problem.set_matrix(matrix)
   end
   
   def setup_objective_function
@@ -80,7 +88,6 @@ class Model
   end
   
   def coefficient(column_id, row_id, value)
-    @coefficients[row_id] ||= {}
     @coefficients[row_id][column_id] = value
   end
     
